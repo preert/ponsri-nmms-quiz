@@ -4033,7 +4033,226 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
           ),
+
+          const SizedBox(height: 16),
+
+          // Privacy Policy Card
+          Container(
+            decoration: BoxDecoration(
+              color: isDark ? const Color(0xFF131B2E) : Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: isDark ? Colors.white10 : Colors.black12),
+            ),
+            child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              leading: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: primary.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(Icons.shield_outlined, color: primary, size: 22),
+              ),
+              title: const Text(
+                'પ્રાઈવસી પોલિસી (Privacy Policy)',
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+              ),
+              subtitle: const Text(
+                'વિદ્યાર્થી સુરક્ષા, કેમેરા પરમિશન અને ડેટા નિયમો',
+                style: TextStyle(fontSize: 11),
+              ),
+              trailing: const Icon(Icons.chevron_right, size: 18),
+              onTap: () => _showPrivacyPolicySheet(context, isDark, primary),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Center(
+            child: Text(
+              'પી.એમ.શ્રી. પ્રાથમિક વિદ્યામંદિર પોંસરી • v1.6.0',
+              style: TextStyle(
+                fontSize: 11,
+                color: isDark ? Colors.white38 : Colors.black38,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          const SizedBox(height: 20),
         ],
+      ),
+    );
+  }
+
+  void _showPrivacyPolicySheet(BuildContext context, bool isDark, Color primary) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.85,
+          decoration: BoxDecoration(
+            color: isDark ? const Color(0xFF0F172A) : Colors.white,
+            borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
+          ),
+          padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: isDark ? Colors.white24 : Colors.black12,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: primary.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(Icons.privacy_tip_outlined, color: primary, size: 22),
+                  ),
+                  const SizedBox(width: 12),
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'પ્રાઈવસી પોલિસી (Privacy Policy)',
+                          style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16),
+                        ),
+                        Text(
+                          'PM SHRI PRATHMIK VIDHYAMANDIR PONSRI',
+                          style: TextStyle(fontSize: 10, color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => Navigator.pop(ctx),
+                    icon: const Icon(Icons.close),
+                  ),
+                ],
+              ),
+              const Divider(height: 24),
+              Expanded(
+                child: ListView(
+                  children: [
+                    _buildPolicySection(
+                      icon: Icons.person_search_outlined,
+                      title: '૧. એકત્રિત માહિતી (Information Collected)',
+                      body:
+                          'પરીક્ષા પરિણામ અને પ્રમાણીકરણ માટે માત્ર Google એકાઉન્ટ માહિતી (નામ, ઈમેઈલ, પ્રોફાઈલ ફોટો) તથા વિદ્યાર્થીનો રોલ નંબર અને ધોરણ મેળવવામાં આવે છે.',
+                      isDark: isDark,
+                      primary: primary,
+                    ),
+                    _buildPolicySection(
+                      icon: Icons.camera_alt_outlined,
+                      title: '૨. કેમેરા પ્રોક્ટરિંગ (Strictly Local Camera)',
+                      body:
+                          'પરીક્ષા દરમિયાન પ્રમાણિકતા જળવાય તે માટે ફ્રન્ટ કેમેરા માત્ર ડિવાઇસ સ્ક્રીન પર લોકલ પ્રીવ્યુ તરીકે દેખાય છે. કોઈ પણ ફોટો કે વિડિયો રેકોર્ડ કે સર્વર પર અપલોડ થતો નથી.',
+                      isDark: isDark,
+                      primary: primary,
+                    ),
+                    _buildPolicySection(
+                      icon: Icons.block_outlined,
+                      title: '૩. જાહેરાત મુક્ત (No Advertisements)',
+                      body:
+                          'આ એપ પ્રાથમિક શાળાના વિદ્યાર્થીઓ (ધોરણ ૫ CET અને ધોરણ ૮ NMMS) માટે સંપૂર્ણ નિઃશુલ્ક અને જાહેરાત મુક્ત છે. કોઈ પણ ડેટા ત્રીજી પાર્ટીને વહેંચવામાં આવતો નથી.',
+                      isDark: isDark,
+                      primary: primary,
+                    ),
+                    _buildPolicySection(
+                      icon: Icons.cloud_done_outlined,
+                      title: '૪. ડેટા સુરક્ષા (Cloud Security)',
+                      body:
+                          'પરીક્ષા પરિણામો Google Firebase Cloud Firestore પર એન્ક્રિપ્ટેડ સ્વરૂપે સાચવવામાં આવે છે, જે શાળાના અધિકૃત એડમિન સિવાય કોઈ એક્સેસ કરી શકતું નથી.',
+                      isDark: isDark,
+                      primary: primary,
+                    ),
+                    _buildPolicySection(
+                      icon: Icons.school_outlined,
+                      title: '૫. સંપર્ક (School Contact)',
+                      body:
+                          'પી.એમ.શ્રી. પ્રાથમિક વિદ્યામંદિર પોંસરી, તા. ગણદેવી, જી. નવસારી.\nEmail: patelsandip288@gmail.com / ponsri.big.gan.nav@gmail.com\nવેબસાઇટ: https://nmms.ponsrischool.in/privacy',
+                      isDark: isDark,
+                      primary: primary,
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () => Navigator.pop(ctx),
+                  icon: const Icon(Icons.check, size: 18),
+                  label: const Text('સમજાયું (Close)', style: TextStyle(fontWeight: FontWeight.bold)),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: primary,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildPolicySection({
+    required IconData icon,
+    required String title,
+    required String body,
+    required bool isDark,
+    required Color primary,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF8FAFC),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: isDark ? Colors.white10 : Colors.black12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(icon, size: 16, color: primary),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 6),
+            Text(
+              body,
+              style: TextStyle(
+                fontSize: 11,
+                color: isDark ? Colors.white70 : Colors.black87,
+                height: 1.4,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
